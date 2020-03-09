@@ -29,8 +29,8 @@ pipeline {
 			gitTool: 'Git_Centos', 
 			submoduleCfg: [], 
 			userRemoteConfigs: [[
-				credentialsId: 'GitHub_danivalenciaCeiba', 
-				url:'https://github.com/danivalenciaCeiba/ADN-Ceiba.git'
+				credentialsId: 'personal-github', 
+				url:'https://github.com/valenciadaniel0/buyGroup.git'
 			]]
 		])
         
@@ -39,7 +39,7 @@ pipeline {
     
 	stage('Clean & Compile') {
       steps{
-      	sh 'gradle --b ./centralmayorista/build.gradle clean compileJava'
+      	sh 'gradle --b ./back/build.gradle clean compileJava'
       }
     }
 	
@@ -47,16 +47,16 @@ pipeline {
       steps {
         echo "------------>Build<------------"
         //Construir sin tarea test que se ejecutó previamente
-		sh 'gradle --b ./centralmayorista/build.gradle build -x test'
+		sh 'gradle --b ./back/build.gradle build -x test'
                 
       }
     } 
 	
     stage('Unit Tests') {
       steps{
-      //	sh 'gradle --b ./centralmayorista/build.gradle clean'
+      //	sh 'gradle --b ./back/build.gradle clean'
         echo "------------>Unit Tests<------------"
-		sh 'gradle --b ./centralmayorista/build.gradle test'
+		sh 'gradle --b ./back/build.gradle test'
       }
     }
 
@@ -78,7 +78,7 @@ pipeline {
     }
     success {
 		echo 'This will run only if successful'
-		junit 'centralmayorista/build/test-results/test/*.xml' 
+		junit 'back/build/test-results/test/*.xml' 
 	}
 
     failure {

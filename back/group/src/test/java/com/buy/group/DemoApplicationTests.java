@@ -1,5 +1,7 @@
 package com.buy.group;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,7 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DemoApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void demoTest() {
+		assertTrue(true);
 	}
 
 }

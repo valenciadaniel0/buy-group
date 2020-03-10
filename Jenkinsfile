@@ -12,8 +12,8 @@ pipeline {
 
   //Una sección que define las herramientas preinstaladas en Jenkins
   tools {
-    jdk 'JDK8_Centos' //Preinstalada en la Configuración del Master
-    gradle 'Gradle5.6_Centos' //Preinstalada en la Configuración del Master
+    jdk 'jdkJava11' //Preinstalada en la Configuración del Master
+    gradle 'Gradle6.2.2' //Preinstalada en la Configuración del Master
   }
 
   //Aquí comienzan los items del Pipeline
@@ -26,7 +26,7 @@ pipeline {
 			branches: [[name: '*/master']], 
 			doGenerateSubmoduleConfigurations: false, 
 			extensions: [], 
-			gitTool: 'Git_Centos', 
+			gitTool: 'GitJenkins', 
 			submoduleCfg: [], 
 			userRemoteConfigs: [[
 				credentialsId: 'personal-github', 

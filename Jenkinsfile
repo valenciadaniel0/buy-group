@@ -36,12 +36,13 @@ pipeline {
         
       }
     }
-    
+
+   /* 
 	stage('Clean & Compile') {
       steps{
       	sh 'gradle --b ./back/build.gradle clean compileJava'
       }
-    }
+    }*/
 	
 	 stage('Build') {
       steps {

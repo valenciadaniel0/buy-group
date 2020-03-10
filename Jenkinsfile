@@ -36,19 +36,18 @@ pipeline {
         
       }
     }
-
-   /* 
+    
 	stage('Clean & Compile') {
       steps{
-      	sh 'gradle --b ./back/build.gradle clean compileJava'
+      	sh 'gradle --b ./back/group/build.gradle clean compileJava'
       }
-    }*/
+    }
 	
 	 stage('Build') {
       steps {
         echo "------------>Build<------------"
         //Construir sin tarea test que se ejecutó previamente
-		sh 'gradle --b ./back/build.gradle build -x test'
+		sh 'gradle --b ./back/group/build.gradle build -x test'
                 
       }
     } 
@@ -57,7 +56,7 @@ pipeline {
       steps{
       //	sh 'gradle --b ./back/build.gradle clean'
         echo "------------>Unit Tests<------------"
-		sh 'gradle --b ./back/build.gradle test'
+		sh 'gradle --b ./back/group/build.gradle test'
       }
     }
 
@@ -79,7 +78,7 @@ pipeline {
     }
     success {
 		echo 'This will run only if successful'
-		junit 'back/build/test-results/test/*.xml' 
+		junit 'back/group/build/test-results/test/*.xml' 
 	}
 
     failure {

@@ -39,7 +39,7 @@ pipeline {
     
 	stage('Clean & Compile') {
       steps{
-      	sh 'gradle --b ./back/group/build.gradle clean compileJava'
+      	bat 'gradle --b ./back/group/build.gradle clean compileJava'
       }
     }
 	
@@ -47,7 +47,7 @@ pipeline {
       steps {
         echo "------------>Build<------------"
         //Construir sin tarea test que se ejecutó previamente
-		sh 'gradle --b ./back/group/build.gradle build -x test'
+		bat 'gradle --b ./back/group/build.gradle build -x test'
                 
       }
     } 
@@ -56,7 +56,7 @@ pipeline {
       steps{
       //	sh 'gradle --b ./back/build.gradle clean'
         echo "------------>Unit Tests<------------"
-		sh 'gradle --b ./back/group/build.gradle test'
+		bat 'gradle --b ./back/group/build.gradle test'
       }
     }
 
@@ -64,7 +64,7 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-			sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+			bat "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
         }
       }
     }

@@ -4,6 +4,10 @@ pipeline {
     label 'master'
   }
 
+  environment{
+    dirSonar = "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}"
+  }
+
   //Opciones específicas de Pipeline dentro del Pipeline
   options {
     	buildDiscarder(logRotator(numToKeepStr: '3'))
@@ -63,7 +67,7 @@ pipeline {
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-        dirSonar = "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}" 
+        //def dirSonar = "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}" 
           echo "${dirSonar}"
         /*
         withSonarQubeEnv('Sonar') {

@@ -69,11 +69,11 @@ pipeline {
         echo '------------>Análisis de código estático<------------'
         //def dirSonar = "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}" 
           echo "${dirSonar}"
-        
+        /*
         withSonarQubeEnv('Sonar') {
           
-			    bat '"${dirSonar}"\\bin\\sonar-scanner'
-        }
+			    bat '${dirSonar}\\bin\\sonar-scanner'
+        }*/
       }
     }
 

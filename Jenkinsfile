@@ -72,7 +72,7 @@ pipeline {
         
         withSonarQubeEnv('Sonar') {
           
-			    bat '"${dirSonar}\\bin\\sonar-scanner"'
+			    bat '"${dirSonar}"\\bin\\sonar-scanner'
         }
       }
     }

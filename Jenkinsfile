@@ -60,7 +60,7 @@ pipeline {
       steps{
       //	sh 'gradle --b ./back/build.gradle clean'
         echo "------------>Unit Tests<------------"
-		bat 'gradle --b ./back/group/build.gradle test'
+		//bat 'gradle --b ./back/group/build.gradle test'
       }
     }
 

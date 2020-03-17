@@ -15,25 +15,29 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class RepositoryUserImplementation implements RepositoryUser, UserDetailsService {
 
-    private UserDBRepository userDBRepository;    
+    private UserDBRepository userDBRepository;
+    private PasswordEncoder bcryptEncoder;    
 
     public RepositoryUserImplementation(UserDBRepository userDBRepository) {
         this.userDBRepository = userDBRepository;
     }
 
     @Override
-    public void create(User user) {
-        this.userDBRepository.save(MapperUser.modelToEntity(user));
+    public void save(User user) {
+        EntityUser entityUser = MapperUser.modelToEntity(user);
+        entityUser.encryptPassword(bcryptEncoder);
+        this.userDBRepository.save(entityUser);
     }    
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        EntityUser user = this.userDBRepository.findByUserName(username);
+        EntityUser user = this.userDBRepository.findByUsername(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
         }
@@ -43,9 +47,8 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
         for(EntityRole role : roles){
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
-
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
-        return userDetails;
+        
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
     
 }

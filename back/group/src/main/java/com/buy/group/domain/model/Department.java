@@ -8,10 +8,14 @@ public class Department {
     private String name;
     private List<City> cities;
 
-    public Department(Long id,String code, String name) {
-        this.id = id;
+    public Department(String code, String name, List<City> cities) {        
         this.code = code;
         this.name = name;
+        this.cities = cities;
+    }
+
+    public Long getId(){
+        return this.id;
     }
 
     public String getCode(){
@@ -22,7 +26,7 @@ public class Department {
         return this.name;
     }
 
-    public List<City> cities(){
+    public List<City> getCities(){
         return this.cities;
     }
 }

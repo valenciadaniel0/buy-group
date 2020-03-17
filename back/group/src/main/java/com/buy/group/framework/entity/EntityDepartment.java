@@ -18,12 +18,17 @@ public class EntityDepartment{
     @Column(name = "name",nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "departments")
+    @Column(name = "code",nullable = false)
+    private String code;
+
+    @OneToMany(mappedBy = "department")
     private List<EntityCity> cities;
 
 
-    public EntityDepartment(String name){
+    public EntityDepartment(String name, String code, List<EntityCity> cities){
         this.name = name;
+        this.code = code;
+        this.cities = cities;
     }
 
     public String getName(){
@@ -32,5 +37,21 @@ public class EntityDepartment{
 
     public void setName(String name){
         this.name = name;
+    } 
+    
+    public String getCode(){
+        return this.code;
     }
+
+    public void setCode(String code){
+        this.code = code;
+    } 
+
+    public List<EntityCity> getCities(){
+        return this.cities;
+    }
+
+    public void setCities(List<EntityCity> cities){
+        this.cities = cities;
+    } 
 }

@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Entity(name="users")
 public class EntityUser{
     @Id
@@ -27,14 +29,14 @@ public class EntityUser{
     @Column(name="password", nullable = false)
     private String password;
 
-    @Column(name = "deviceToken")
+    @Column(name = "device_token")
     private String deviceToken;
 
     @Column(name="name", nullable = false)
     private String name;   
     
     @Column(name="active", nullable = false)
-    private boolean active;  
+    private Integer active;  
 
     @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "city_id")
@@ -49,13 +51,21 @@ public class EntityUser{
                     referencedColumnName = "id"))
     private List<EntityRole> roles;
 
-    public EntityUser(String username, String password, String deviceToken, String name, boolean active, EntityCity city) {
+    @ManyToMany(mappedBy = "user")
+    List<EntityBuyer> buyers;
+
+    @ManyToMany(mappedBy = "user")
+    List<EntityCompany> companies;
+
+    public EntityUser(String username, String password, String deviceToken, String name, Integer active, EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies) {
         this.username = username;
         this.password = password;
         this.deviceToken = deviceToken;
         this.name = name;
         this.active = active;
-        this.city = city;        
+        this.city = city; 
+        this.buyers = buyers;
+        this.companies = companies;       
     }
 
     public Long getId() {
@@ -96,17 +106,13 @@ public class EntityUser{
 
     public void setName(String name) {
         this.name = name;
-    }
+    }    
 
-    public boolean isActive() {
+    public Integer getActive() {
         return this.active;
     }
 
-    public boolean getActive() {
-        return this.active;
-    }
-
-    public void setActive(boolean active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 
@@ -120,5 +126,9 @@ public class EntityUser{
 
     public List<EntityRole> getRoles(){
         return this.roles;
+    }  
+    
+    public void encryptPassword(PasswordEncoder bcryptEncoder){
+        this.setPassword(bcryptEncoder.encode(this.getPassword()));
     }
 }

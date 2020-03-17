@@ -1,4 +1,4 @@
-package com.buy.group.domain.service;
+package com.buy.group.domain.service.users;
 
 import com.buy.group.domain.model.User;
 import com.buy.group.domain.port.RepositoryUser;
@@ -11,6 +11,6 @@ public class ServiceCreateUser{
     }
 
     public void run(User user){
-        this.repositoryUser.create(user);
+        this.repositoryUser.save(user);
     }
 }

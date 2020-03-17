@@ -20,14 +20,18 @@ public class EntityCity{
     @Column(name = "name")
     private String name;
 
+    @Column(name = "code")
+    private String code;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     @JsonIgnore
     private EntityDepartment department;
 
 
-    public EntityCity(String name, EntityDepartment department){
+    public EntityCity(String name,String code, EntityDepartment department){
         this.name = name;
+        this.code = code;
         this.department = department;
     }
 
@@ -37,6 +41,14 @@ public class EntityCity{
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public String getCode(){
+        return this.code;
+    }
+
+    public void setCode(String code){
+        this.code = code;
     }
 
     public EntityDepartment getDepartment(){

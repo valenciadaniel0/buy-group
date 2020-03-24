@@ -12,6 +12,8 @@ public class MapperCompany{
     }
 
     public static List<EntityCompany> modelsListToEntitiesList(List<Company> companies){
+        if (companies == null)
+            return null;
         return companies.stream().map(company -> MapperCompany.modelToEntity(company)).collect(Collectors.toList());        
     }
 }

@@ -9,6 +9,7 @@ import com.buy.group.domain.model.Role;
 
 public class CommandUser{
     private String username;
+    private String email;
     private String password;
     private String deviceToken;
     private String name;
@@ -18,8 +19,9 @@ public class CommandUser{
     private List<Buyer> buyers;
     private List<Company> companies;
 
-    public CommandUser(String username, String password, String deviceToken, String name, Integer active, City city, List<Role> roles, List<Buyer> buyers, List<Company> companies) {
+    public CommandUser(String username,String email, String password, String deviceToken, String name, Integer active, City city, List<Role> roles, List<Buyer> buyers, List<Company> companies) {
         this.username = username;
+        this.email = email;
         this.password = password;
         this.deviceToken = deviceToken;
         this.name = name;
@@ -32,6 +34,10 @@ public class CommandUser{
 
     public String getUsername() {
         return this.username;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 
     public String getPassword() {

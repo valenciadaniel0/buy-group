@@ -7,6 +7,9 @@ public class CommandCity{
     private String code;
     private Department department;
 
+    public CommandCity(){        
+    }
+
     public CommandCity(String name, String code, Department department){
         this.name = name;
         this.code = code;

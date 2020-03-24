@@ -4,6 +4,5 @@ import com.buy.group.framework.entity.EntityDepartment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DepartmentDBRepository extends JpaRepository<EntityDepartment,Long>{
-
+public interface DepartmentDBRepository extends JpaRepository<EntityDepartment,Long>{    
 }

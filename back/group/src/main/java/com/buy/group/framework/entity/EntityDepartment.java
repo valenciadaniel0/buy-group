@@ -1,16 +1,14 @@
 package com.buy.group.framework.entity;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity(name = "departments")
-public class EntityDepartment{
+public class EntityDepartment{    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,17 +16,13 @@ public class EntityDepartment{
     @Column(name = "name",nullable = false)
     private String name;
 
-    @Column(name = "code",nullable = false)
-    private String code;
-
-    @OneToMany(mappedBy = "department")
-    private List<EntityCity> cities;
+    @Column(name = "code",nullable = false)    
+    private String code;    
 
 
-    public EntityDepartment(String name, String code, List<EntityCity> cities){
+    public EntityDepartment(String name, String code){
         this.name = name;
-        this.code = code;
-        this.cities = cities;
+        this.code = code;        
     }
 
     public String getName(){
@@ -45,13 +39,5 @@ public class EntityDepartment{
 
     public void setCode(String code){
         this.code = code;
-    } 
-
-    public List<EntityCity> getCities(){
-        return this.cities;
-    }
-
-    public void setCities(List<EntityCity> cities){
-        this.cities = cities;
     } 
 }

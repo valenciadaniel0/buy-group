@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class RepositoryDepartmentImplementation implements RepositoryDepartment {
-    DepartmentDBRepository departmentDBRepository;
+    private DepartmentDBRepository departmentDBRepository;
 
     public RepositoryDepartmentImplementation(DepartmentDBRepository departmentDBRepository){
         this.departmentDBRepository = departmentDBRepository;
@@ -19,6 +19,5 @@ public class RepositoryDepartmentImplementation implements RepositoryDepartment 
     @Override
     public void save(Department department) {                       
         this.departmentDBRepository.save(MapperDepartment.modelToEntity(department));
-    }
-    
+    }    
 }

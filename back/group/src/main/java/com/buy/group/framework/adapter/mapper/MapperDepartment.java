@@ -5,6 +5,6 @@ import com.buy.group.framework.entity.EntityDepartment;
 
 public class MapperDepartment{
     public static EntityDepartment modelToEntity(Department department){
-        return new EntityDepartment(department.getName(), department.getCode(), MapperCity.modelsListToEntitiesList(department.getCities()));
+        return new EntityDepartment(department.getName(), department.getCode());
     }
 }

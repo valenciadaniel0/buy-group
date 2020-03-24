@@ -23,8 +23,8 @@ public class EntityCity{
     @Column(name = "code")
     private String code;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id",nullable = false)
     @JsonIgnore
     private EntityDepartment department;
 

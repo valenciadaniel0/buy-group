@@ -26,6 +26,9 @@ public class EntityUser{
     @Column(name="username", nullable = false)
     private String username;
 
+    @Column(name="email", nullable = false)
+    private String email;
+
     @Column(name="password", nullable = false)
     private String password;
 
@@ -57,8 +60,9 @@ public class EntityUser{
     @ManyToMany(mappedBy = "user")
     List<EntityCompany> companies;
 
-    public EntityUser(String username, String password, String deviceToken, String name, Integer active, EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies) {
+    public EntityUser(String username,String email, String password, String deviceToken, String name, Integer active, EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies) {
         this.username = username;
+        this.email = email;
         this.password = password;
         this.deviceToken = deviceToken;
         this.name = name;
@@ -78,6 +82,14 @@ public class EntityUser{
 
     public String getUsername() {
         return this.username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 
     public void setUsername(String username) {

@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity(name = "buyers")
 public class EntityBuyer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "address")
@@ -29,46 +29,46 @@ public class EntityBuyer {
     private BigDecimal rate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	@JsonIgnore
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
     private EntityUser user;
 
-    public EntityBuyer(String address, String idNumber, BigDecimal rate, EntityUser user){
+    public EntityBuyer(String address, String idNumber, BigDecimal rate, EntityUser user) {
         this.address = address;
         this.idNumber = idNumber;
         this.rate = rate;
         this.user = user;
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return this.address;
     }
 
-    public void setAddress(String address){
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getIdNumber(){
+    public String getIdNumber() {
         return this.idNumber;
     }
 
-    public void setIdNumber(String idNumber){
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
-    public BigDecimal getIdRate(){
+    public BigDecimal getIdRate() {
         return this.rate;
     }
 
-    public void setIdRate(BigDecimal rate){
+    public void setIdRate(BigDecimal rate) {
         this.rate = rate;
     }
 
-    public EntityUser getUser(){
+    public EntityUser getUser() {
         return this.user;
     }
 
-    public void setUser(EntityUser user){
+    public void setUser(EntityUser user) {
         this.user = user;
     }
 }

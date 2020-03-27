@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 @Entity(name = "roles")
 public class EntityRole{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name", nullable = false)
@@ -21,7 +21,8 @@ public class EntityRole{
     @ManyToMany(mappedBy = "roles")
     List<EntityUser> users;   
 
-    public EntityRole(String name) {       
+    public EntityRole(Long id,String name) {      
+        this.id = id; 
         this.name = name;        
     }
 

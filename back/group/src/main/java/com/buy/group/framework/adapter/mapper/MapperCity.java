@@ -8,7 +8,8 @@ import com.buy.group.framework.entity.EntityCity;
 
 public class MapperCity {
     public static EntityCity modelToEntity(City city) {
-        return new EntityCity(city.getName(), city.getCode(), MapperDepartment.modelToEntity(city.getDepartment()));
+        return new EntityCity(city.getId(), city.getName(), city.getCode(),
+                MapperDepartment.modelToEntity(city.getDepartment()));
     }
 
     public static List<EntityCity> modelsListToEntitiesList(List<City> cities) {

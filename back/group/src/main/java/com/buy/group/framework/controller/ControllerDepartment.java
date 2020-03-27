@@ -3,6 +3,7 @@ package com.buy.group.framework.controller;
 import com.buy.group.application.handler.command.CommandDepartment;
 import com.buy.group.application.handler.departments.HandlerCreateDepartment;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ public class ControllerDepartment{
         this.handlerCreateDepartment = handlerCreateDepartment;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public void create(@RequestBody CommandDepartment commandDepartment){        
         this.handlerCreateDepartment.run(commandDepartment);

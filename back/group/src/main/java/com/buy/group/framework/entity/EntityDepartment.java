@@ -1,6 +1,5 @@
 package com.buy.group.framework.entity;
 
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,36 +7,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "departments")
-public class EntityDepartment{    
+public class EntityDepartment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "code",nullable = false)    
-    private String code;    
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
 
-
-    public EntityDepartment(String name, String code){
+    public EntityDepartment(Long id, String name, String code) {
+        this.id = id;
         this.name = name;
-        this.code = code;        
+        this.code = code;
     }
 
-    public String getName(){
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
-    } 
-    
-    public String getCode(){
+    }
+
+    public String getCode() {
         return this.code;
     }
 
-    public void setCode(String code){
+    public void setCode(String code) {
         this.code = code;
-    } 
+    }
 }

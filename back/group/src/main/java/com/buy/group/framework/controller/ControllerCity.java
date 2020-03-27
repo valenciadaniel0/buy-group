@@ -3,6 +3,7 @@ package com.buy.group.framework.controller;
 import com.buy.group.application.handler.cities.HandlerCreateCity;
 import com.buy.group.application.handler.command.CommandCity;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ public class ControllerCity{
         this.handlerCreateCity = handlerCreateCity;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public void create(@RequestBody CommandCity commandCity){                
         this.handlerCreateCity.run(commandCity);

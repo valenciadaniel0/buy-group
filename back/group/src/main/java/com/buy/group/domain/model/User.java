@@ -20,6 +20,9 @@ public class User {
     private List<Buyer> buyers;
     private List<Company> companies;
 
+    public User(){        
+    }
+    
     public User(String username,String email, String password, String deviceToken, String name, Integer active, City city,
             List<Role> roles, List<Buyer> buyers, List<Company> companies) {
         DataValidator.validateNull(username, USERNAME_IS_REQUIRED);

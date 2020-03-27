@@ -14,9 +14,9 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "companies")
-public class EntityCompany{
+public class EntityCompany {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "nit")
@@ -27,13 +27,13 @@ public class EntityCompany{
 
     @Column(name = "rate")
     private BigDecimal rate;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	@JsonIgnore
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
     private EntityUser user;
 
-    public EntityCompany(String nit, String address, BigDecimal rate, EntityUser user) {        
+    public EntityCompany(String nit, String address, BigDecimal rate, EntityUser user) {
         this.nit = nit;
         this.address = address;
         this.rate = rate;

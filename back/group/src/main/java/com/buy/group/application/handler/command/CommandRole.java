@@ -8,6 +8,9 @@ public class CommandRole{
     private String name;
     private List<User> users;
 
+    public CommandRole(){
+    }
+
     public CommandRole(String name, List<User> users){
         this.name = name;
         this.users = users;

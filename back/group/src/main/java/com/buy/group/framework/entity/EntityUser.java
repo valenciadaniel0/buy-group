@@ -17,41 +17,37 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Entity(name="users")
-public class EntityUser{
+@Entity(name = "users")
+public class EntityUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="username", nullable = false)
+    @Column(name = "username", nullable = false,unique = true)
     private String username;
 
-    @Column(name="email", nullable = false)
+    @Column(name = "email", nullable = false,unique = true)
     private String email;
 
-    @Column(name="password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "device_token")
     private String deviceToken;
 
-    @Column(name="name", nullable = false)
-    private String name;   
-    
-    @Column(name="active", nullable = false)
-    private Integer active;  
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "active", nullable = false)
+    private Integer active;
 
     @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "city_id")
-	@JsonIgnore
+    @JoinColumn(name = "city_id")
+    @JsonIgnore
     private EntityCity city;
-    
+
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns
-            = @JoinColumn(name = "user_id",
-            referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id",
-                    referencedColumnName = "id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<EntityRole> roles;
 
     @ManyToMany(mappedBy = "user")
@@ -60,16 +56,20 @@ public class EntityUser{
     @ManyToMany(mappedBy = "user")
     List<EntityCompany> companies;
 
-    public EntityUser(String username,String email, String password, String deviceToken, String name, Integer active, EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies) {
+    public EntityUser(){        
+    }
+    
+    public EntityUser(String username, String email, String password, String deviceToken, String name, Integer active,
+            EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.deviceToken = deviceToken;
         this.name = name;
         this.active = active;
-        this.city = city; 
+        this.city = city;
         this.buyers = buyers;
-        this.companies = companies;       
+        this.companies = companies;
     }
 
     public Long getId() {
@@ -118,7 +118,7 @@ public class EntityUser{
 
     public void setName(String name) {
         this.name = name;
-    }    
+    }
 
     public Integer getActive() {
         return this.active;
@@ -134,13 +134,13 @@ public class EntityUser{
 
     public void setCity(EntityCity city) {
         this.city = city;
-    }    
+    }
 
-    public List<EntityRole> getRoles(){
+    public List<EntityRole> getRoles() {
         return this.roles;
-    }  
-    
-    public void encryptPassword(PasswordEncoder bcryptEncoder){
+    }
+
+    public void encryptPassword(PasswordEncoder bcryptEncoder) {
         this.setPassword(bcryptEncoder.encode(this.getPassword()));
     }
 }

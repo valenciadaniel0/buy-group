@@ -7,6 +7,9 @@ public class City{
     private String code;
     private Department department;    
 
+    public City(){        
+    }
+
     public City(String name,String code, Department department) {   
         DataValidator.validateNull(name, THE_NAME_IS_REQUIRED);
         DataValidator.validateNull(code, THE_CODE_IS_REQUIRED);

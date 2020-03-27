@@ -17,7 +17,7 @@ public class RepositoryCityImplementation implements RepositoryCity {
     }
 
     @Override
-    public void save(City city) {          
+    public void save(City city) {
         this.cityDBRepository.save(MapperCity.modelToEntity(city));
     }
 }

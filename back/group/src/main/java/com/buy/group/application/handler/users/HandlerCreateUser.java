@@ -14,8 +14,7 @@ public class HandlerCreateUser {
         this.serviceCreateUser = serviceCreateUser;
     }
 
-    public void run(CommandUser commandUser) {
-
+    public void run(CommandUser commandUser) {        
         this.serviceCreateUser.run(FactoryUser.create(commandUser));
     }
 }

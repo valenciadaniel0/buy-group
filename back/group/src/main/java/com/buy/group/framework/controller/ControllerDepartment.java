@@ -23,5 +23,4 @@ public class ControllerDepartment{
     public void create(@RequestBody CommandDepartment commandDepartment){        
         this.handlerCreateDepartment.run(commandDepartment);
     }
-
 }

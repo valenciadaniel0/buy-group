@@ -1,6 +1,8 @@
 package com.buy.group.domain.model;
 
-public class Department {
+import java.io.Serializable;
+
+public class Department{
     private static final String THE_CODE_IS_REQUIRED = "The code field is required";
     private static final String THE_NAME_IS_REQUIRED = "The name field is required";
 

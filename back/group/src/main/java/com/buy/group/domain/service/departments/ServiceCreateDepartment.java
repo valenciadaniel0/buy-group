@@ -11,7 +11,7 @@ public class ServiceCreateDepartment {
         this.repositoryDepartment = repositoryDepartment;
     }
 
-    public void run(Department department) {        
+    public void run(Department department) {
         this.repositoryDepartment.save(department);
     }
 }

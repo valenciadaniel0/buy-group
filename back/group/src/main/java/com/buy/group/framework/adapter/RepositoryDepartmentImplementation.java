@@ -4,7 +4,6 @@ import com.buy.group.domain.model.Department;
 import com.buy.group.domain.port.RepositoryDepartment;
 import com.buy.group.framework.adapter.mapper.MapperDepartment;
 import com.buy.group.framework.db_repository.DepartmentDBRepository;
-import com.buy.group.framework.entity.EntityDepartment;
 
 import org.springframework.stereotype.Repository;
 

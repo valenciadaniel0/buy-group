@@ -18,6 +18,9 @@ public class EntityDepartment {
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 
+    public EntityDepartment() {
+    }
+
     public EntityDepartment(Long id, String name, String code) {
         this.id = id;
         this.name = name;

@@ -68,7 +68,7 @@ pipeline {
       steps{
         echo '------------>Análisis de código estático<------------'
         withSonarQubeEnv('Sonar') {
-			sh "${dirSonar}\\bin\\sonar-scanner"
+			sh "${dirSonar}/bin/sonar-scanner"
         }
       }
     }

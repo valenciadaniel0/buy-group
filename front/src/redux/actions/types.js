@@ -1,0 +1,1 @@
+export const SIGN_IN = "CHANGE_LANGUAGE";

@@ -1,4 +1,7 @@
 import React from "react";
+import { compose } from 'redux';
+import { connect } from "react-redux";
+import { signIn } from "../../redux/actions";
 import {
   Container,
   Row,
@@ -9,12 +12,17 @@ import {
   TabContent,
 } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
+import LoginForm from "./loginForm";
 
 class Home extends React.Component {
   translateLabels(key) {
     const translatedText = this.props.t(key);
     return translatedText;
   }
+
+  onSubmit = (formValues) => {
+    this.props.signIn(formValues);
+  };
 
   render() {
     return (
@@ -24,13 +32,9 @@ class Home extends React.Component {
             <TabContainer activeKey="home">
               <Tabs>
                 <Tab eventKey="login" title={this.translateLabels("login")}>
-                  <TabContent>Login</TabContent>
-                </Tab>
-                <Tab
-                  eventKey="profile"
-                  title={this.translateLabels("register")}
-                >
-                  <TabContent>Register</TabContent>
+                  <TabContent>
+                    <LoginForm onSubmit={this.onSubmit} />
+                  </TabContent>
                 </Tab>
               </Tabs>
             </TabContainer>
@@ -41,4 +45,13 @@ class Home extends React.Component {
   }
 }
 
-export default withTranslation("translations")(Home);
+const mapStateToProps = (state) => {
+  return {
+    token: state.payload,
+  };
+};
+
+export default compose(
+  withTranslation("translations"),
+  connect(mapStateToProps, { signIn })
+)(Home);

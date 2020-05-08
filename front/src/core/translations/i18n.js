@@ -1,5 +1,4 @@
 import i18n from "i18next";
-import LanguageDetector from "i18next";
 import es from "./es/common.json";
 
 i18n.init({

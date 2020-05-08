@@ -1,8 +1,8 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
-import history from "../history";
-import Home from "./home";
-import Admin from './admin';
+import history from "./core/history";
+import Home from "./features/home";
+import Admin from './features/admin';
 
 class App extends React.Component {  
   render() {

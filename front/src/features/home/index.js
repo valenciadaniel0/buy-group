@@ -1,7 +1,7 @@
 import React from "react";
 import { compose } from 'redux';
 import { connect } from "react-redux";
-import { signIn } from "../../redux/actions";
+import { signIn } from "../../core/redux/actions";
 import {
   Container,
   Row,
@@ -12,14 +12,10 @@ import {
   TabContent,
 } from "react-bootstrap";
 import { withTranslation } from "react-i18next";
+import {translate} from '../../core/translations';
 import LoginForm from "./loginForm";
 
-class Home extends React.Component {
-  translateLabels(key) {
-    const translatedText = this.props.t(key);
-    return translatedText;
-  }
-
+class Home extends React.Component {  
   onSubmit = (formValues) => {
     this.props.signIn(formValues);
   };
@@ -31,7 +27,7 @@ class Home extends React.Component {
           <Col xs lg="6">
             <TabContainer activeKey="home">
               <Tabs>
-                <Tab eventKey="login" title={this.translateLabels("login")}>
+                <Tab eventKey="login" title={translate("login",this.props.t)}>
                   <TabContent>
                     <LoginForm onSubmit={this.onSubmit} />
                   </TabContent>

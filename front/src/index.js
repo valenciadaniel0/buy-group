@@ -5,9 +5,9 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
 import { I18nextProvider } from "react-i18next";
-import i18n from "./translations/i18n";
-import App from "./components/app";
-import reducers from "./redux/reducers";
+import i18n from "./core/translations/i18n";
+import App from "./app";
+import reducers from "./core/redux/reducers";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

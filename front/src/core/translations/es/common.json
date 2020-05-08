@@ -1,0 +1,8 @@
+{
+  "translations": {
+    "enter_username": "Ingresar nombre de usuario",
+    "enter_password": "Ingresar contraseña",
+    "login": "Ingresar",
+    "register": "Registro"
+  }
+}

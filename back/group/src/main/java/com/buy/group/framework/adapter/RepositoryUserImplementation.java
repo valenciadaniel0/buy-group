@@ -11,7 +11,6 @@ import com.buy.group.framework.entity.EntityRole;
 import com.buy.group.framework.entity.EntityUser;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,10 +41,10 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        EntityUser user = this.userDBRepository.findByUsername(username);
+    public EntityUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        EntityUser user = this.userDBRepository.findByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("User not found with email: " + email);
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
@@ -54,8 +53,7 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                authorities);
+        return user;       
     }
 
     @Override

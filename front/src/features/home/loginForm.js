@@ -1,10 +1,10 @@
 import React from "react";
-import { compose } from 'redux';
+import { compose } from "redux";
 import { Field, reduxForm } from "redux-form";
 import { Form, FormGroup } from "react-bootstrap";
 import PrimaryButton from "../../shared/primaryButton";
 import { withTranslation } from "react-i18next";
-import {translate} from '../../core/translations';
+import { translate } from "../../core/translations";
 
 class LoginForm extends React.Component {
   renderError({ error, touched }) {
@@ -19,9 +19,15 @@ class LoginForm extends React.Component {
   renderInput = ({ input, label, meta }) => {
     const className = `field ${meta.touched && meta.error ? "error" : ""}`;
     return (
-      <div className={className}>
-        <label>{label}</label>
-        <input {...input} autoComplete="off" className="form-control" />
+      <div className="form-group">
+        <label htmlFor={input.name}>{label}</label>
+        <input
+          {...input}
+          autoComplete="off"
+          id={input.name}
+          className="form-control"
+          type={"password" === input.name ? "password" : "text"}
+        />
         {this.renderError(meta)}
       </div>
     );
@@ -39,19 +45,22 @@ class LoginForm extends React.Component {
       >
         <FormGroup className="form-group">
           <Field
-            name="username"
+            name="email"
+            type="email"
+            id="email"
             component={this.renderInput}
-            label={translate("enter_username",this.props.t)}
+            label={translate("enter_email", this.props.t)}
           />
         </FormGroup>
         <FormGroup className="form-group">
           <Field
             name="password"
+            type="password"
             component={this.renderInput}
-            label={translate("enter_password",this.props.t)}
+            label={translate("enter_password", this.props.t)}
           />
         </FormGroup>
-        <PrimaryButton text={translate("login",this.props.t)} />        
+        <PrimaryButton text={translate("login", this.props.t)} submit={true} />
       </Form>
     );
   }
@@ -59,8 +68,8 @@ class LoginForm extends React.Component {
 
 const validate = (formValues) => {
   const errors = {};
-  if (!formValues.username) {
-    errors.username = "You must enter a username";
+  if (!formValues.email) {
+    errors.email = "You must enter an email";
   }
 
   if (!formValues.password) {

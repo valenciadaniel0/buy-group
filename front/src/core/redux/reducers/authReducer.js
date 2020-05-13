@@ -8,9 +8,9 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return { ...state, isSignedIn: true, token: action.payload };
+      return { ...state, isSignedIn: true, loggedUser: action.payload };
     case SIGN_OUT:
-      return { ...state, isSignedIn: false, token: null };
+      return { ...state, isSignedIn: false, loggedUser: null };
 
     default:
       return state;

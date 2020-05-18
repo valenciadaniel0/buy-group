@@ -23,7 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity(name = "users")
 public class EntityUser implements UserDetails, Serializable {
-        
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -67,7 +67,7 @@ public class EntityUser implements UserDetails, Serializable {
     }
 
     public EntityUser(String username, String email, String password, String deviceToken, String name, Integer active,
-            EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies) {
+            EntityCity city, List<EntityRole> roles, List<EntityBuyer> buyers, List<EntityCompany> companies) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -75,6 +75,7 @@ public class EntityUser implements UserDetails, Serializable {
         this.name = name;
         this.active = active;
         this.city = city;
+        this.roles = roles;
         this.buyers = buyers;
         this.companies = companies;
     }

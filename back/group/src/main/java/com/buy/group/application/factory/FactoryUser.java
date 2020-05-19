@@ -10,8 +10,8 @@ public class FactoryUser {
     }
 
     public static User create(CommandUser commandUser) {
-        return new User(commandUser.getUsername(),commandUser.getEmail(), commandUser.getPassword(), commandUser.getDeviceToken(),
-                commandUser.getName(), commandUser.isActive(), commandUser.getCity(), commandUser.getRoles(),
-                commandUser.getBuyers(), commandUser.getCompanies());
+        return new User(commandUser.getId(), commandUser.getUsername(), commandUser.getEmail(),
+                commandUser.getPassword(), commandUser.getDeviceToken(), commandUser.getName(), commandUser.isActive(),
+                commandUser.getCity(), commandUser.getRoles(), commandUser.getBuyers(), commandUser.getCompanies());
     }
 }

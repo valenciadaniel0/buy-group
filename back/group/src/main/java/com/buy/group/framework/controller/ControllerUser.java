@@ -1,8 +1,5 @@
 package com.buy.group.framework.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.buy.group.application.handler.command.CommandUser;
 import com.buy.group.application.handler.users.HandlerCreateUser;
 import com.buy.group.application.handler.users.HandlerGetUserByEmail;
@@ -57,6 +54,8 @@ public class ControllerUser {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
+        User user= this.handlerGetUserByEmail.run(userCommand.getUsername());
+        System.out.println(user.getEmail());
         return ResponseEntity.ok(new JwtResponse(token));
     }
 

@@ -1,5 +1,6 @@
 package com.buy.group.framework.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity(name = "roles")
-public class EntityRole{    
+public class EntityRole implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,15 +23,15 @@ public class EntityRole{
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<EntityUser> users;   
+    private List<EntityUser> users;
 
-    public EntityRole(){        
+    public EntityRole() {
     }
 
-    public EntityRole(Long id,String name, List<EntityUser> users) {      
-        this.id = id; 
-        this.name = name;   
-        this.users = users;     
+    public EntityRole(Long id, String name, List<EntityUser> users) {
+        this.id = id;
+        this.name = name;
+        this.users = users;
     }
 
     public Long getId() {
@@ -45,7 +48,7 @@ public class EntityRole{
 
     public void setName(String name) {
         this.name = name;
-    }       
+    }
 
     public List<EntityUser> getUsers() {
         return this.users;

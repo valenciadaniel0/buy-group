@@ -3,8 +3,6 @@ package com.buy.group.framework.adapter.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.Entity;
-
 import com.buy.group.domain.model.Buyer;
 import com.buy.group.framework.entity.EntityBuyer;
 

@@ -7,13 +7,13 @@ import com.buy.group.domain.model.User;
 import com.buy.group.framework.entity.EntityUser;
 
 public class MapperUser {
-    public static EntityUser modelToEntity(User user) {        
-        return new EntityUser(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(),
-                user.getDeviceToken(), user.getName(), user.getActive(), MapperCity.modelToEntity(user.getCity()),
+    public static EntityUser modelToEntity(User user) {
+        return new EntityUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getDeviceToken(),
+                user.getName(), user.getActive(), MapperCity.modelToEntity(user.getCity()),
+                MapperRole.modelsListToEntitiesList(user.getRoles()),
                 MapperBuyer.modelsListToEntitiesList(user.getBuyers()),
-                MapperCompany.modelsListToEntitiesList(user.getCompanies()),
-                MapperRole.modelsListToEntitiesList(user.getRoles()));
-    }
+                MapperCompany.modelsListToEntitiesList(user.getCompanies()));
+    } 
 
     public static List<EntityUser> modelsListToEntitiesList(List<User> users) {
         if (users == null)

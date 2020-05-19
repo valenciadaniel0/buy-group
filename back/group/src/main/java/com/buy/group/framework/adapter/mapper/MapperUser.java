@@ -1,13 +1,23 @@
 package com.buy.group.framework.adapter.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.buy.group.domain.model.User;
 import com.buy.group.framework.entity.EntityUser;
 
 public class MapperUser {
-    public static EntityUser modelToEntity(User user) {
-        return new EntityUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getDeviceToken(),
-                user.getName(), user.getActive(), MapperCity.modelToEntity(user.getCity()),
+    public static EntityUser modelToEntity(User user) {        
+        return new EntityUser(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(),
+                user.getDeviceToken(), user.getName(), user.getActive(), MapperCity.modelToEntity(user.getCity()),
                 MapperBuyer.modelsListToEntitiesList(user.getBuyers()),
-                MapperCompany.modelsListToEntitiesList(user.getCompanies()));
+                MapperCompany.modelsListToEntitiesList(user.getCompanies()),
+                MapperRole.modelsListToEntitiesList(user.getRoles()));
+    }
+
+    public static List<EntityUser> modelsListToEntitiesList(List<User> users) {
+        if (users == null)
+            return null;
+        return users.stream().map(user -> MapperUser.modelToEntity(user)).collect(Collectors.toList());
     }
 }

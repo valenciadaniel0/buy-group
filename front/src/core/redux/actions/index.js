@@ -12,7 +12,8 @@ export const signOut = () => {
 export const signIn = (formValues) => async (dispatch) => {
   const response = await group.post("/api/users/authenticate", {
     ...formValues,
-  });  
+  });
+  console.log(formValues);
   dispatch({
     type: SIGN_IN,
     payload: response.data,

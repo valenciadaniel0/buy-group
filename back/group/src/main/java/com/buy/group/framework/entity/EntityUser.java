@@ -1,7 +1,5 @@
 package com.buy.group.framework.entity;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,15 +14,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity(name = "users")
-public class EntityUser implements UserDetails, Serializable {
-        
-    private static final long serialVersionUID = 1L;
+public class EntityUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,8 +59,10 @@ public class EntityUser implements UserDetails, Serializable {
     public EntityUser() {
     }
 
-    public EntityUser(String username, String email, String password, String deviceToken, String name, Integer active,
-            EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies) {
+    public EntityUser(Long id, String username, String email, String password, String deviceToken, String name,
+            Integer active, EntityCity city, List<EntityBuyer> buyers, List<EntityCompany> companies,
+            List<EntityRole> roles) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -77,6 +72,7 @@ public class EntityUser implements UserDetails, Serializable {
         this.city = city;
         this.buyers = buyers;
         this.companies = companies;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -149,35 +145,5 @@ public class EntityUser implements UserDetails, Serializable {
 
     public void encryptPassword(PasswordEncoder bcryptEncoder) {
         this.setPassword(bcryptEncoder.encode(this.getPassword()));
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
     }
 }

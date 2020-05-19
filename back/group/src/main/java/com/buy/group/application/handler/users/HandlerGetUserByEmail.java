@@ -13,7 +13,7 @@ public class HandlerGetUserByEmail {
         this.serviceGetUserByEmail = serviceGetUserByEmail;
     }
 
-    public User run(String email) {
+    public User run(String email) {        
         return this.serviceGetUserByEmail.run(email);
     }
 }

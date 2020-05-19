@@ -41,23 +41,24 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
     }
 
     @Override
-    public EntityUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        EntityUser user = this.userDBRepository.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with email: " + email);
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		EntityUser user = this.userDBRepository.findByUsername(username);
+		if (user == null) {
+			throw new UsernameNotFoundException("User not found with username: " + username);
         }
-
+        
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<EntityRole> roles = user.getRoles();
-        for (EntityRole role : roles) {
+        for(EntityRole role : roles){
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        return user;       
-    }
+        UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+        return userDetails;		
+	}
 
     @Override
-    public User getByEmail(String email) {
+    public User findByEmail(String email) {        
         return this.modelMapper.map(this.userDBRepository.findByEmail(email), User.class);
     }
 }

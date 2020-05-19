@@ -3,6 +3,10 @@
     "enter_email": "Ingresar correo electrónico",
     "enter_password": "Ingresar contraseña",
     "login": "Ingresar",
+    "logout": "Cerrar sesión",
+    "long_texts":{
+      "users_card":"Podrás ver los usuarios registrados en el sistema"
+    },
     "register": "Registro"
   }
 }

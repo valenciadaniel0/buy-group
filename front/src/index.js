@@ -1,19 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./main.scss";
 import React from "react";
 import ReactDOM from "react-dom";
+import store from "./core/redux/store";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
-import reduxThunk from "redux-thunk";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./core/translations/i18n";
 import App from "./app";
-import reducers from "./core/redux/reducers";
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  reducers,
-  composeEnhancers(applyMiddleware(reduxThunk))
-);
 
 ReactDOM.render(
   <Provider store={store}>

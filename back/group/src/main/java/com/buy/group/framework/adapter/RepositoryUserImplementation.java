@@ -48,7 +48,7 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<EntityRole> roles = user.getRoles();
-        for (EntityRole role : roles) {
+        for (EntityRole role : roles) {            
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 

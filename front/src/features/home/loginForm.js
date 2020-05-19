@@ -60,7 +60,7 @@ class LoginForm extends React.Component {
             label={translate("enter_password", this.props.t)}
           />
         </FormGroup>
-        <PrimaryButton text={translate("login", this.props.t)} submit={true} />
+        <PrimaryButton text={translate("login", this.props.t)} isSubmit={true} />
       </Form>
     );
   }

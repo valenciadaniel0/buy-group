@@ -1,36 +1,21 @@
 import reducers from "./reducers";
 import reduxThunk from "redux-thunk";
 import { createStore, applyMiddleware, compose } from "redux";
+import { persistReducer } from "redux-persist";
+import localForage from "localforage";
 
-function saveToLocalStorage(state) {
-  try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem("state", serializedState);
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-function loadFromLocalStorage() {
-  try {
-    const serializedState = localStorage.getItem("state");
-    if (serializedState === null) return undefined;
-    return JSON.parse(serializedState);
-  } catch (e) {
-    console.log(e);
-    return undefined;
-  }
-}
-
-const persistedState = loadFromLocalStorage();
+let config = {
+  key: 'root',
+  storage: localForage,
+  whitelist: ['auth']
+};
+let configureReducer = persistReducer(config, reducers);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-  reducers,
-  persistedState,
+  configureReducer,
+  undefined,
   composeEnhancers(applyMiddleware(reduxThunk))
 );
-
-store.subscribe(() => saveToLocalStorage(store.getState()));
 
 export default store;

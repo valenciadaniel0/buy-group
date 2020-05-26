@@ -9,6 +9,6 @@ public class FactoryCity{
     }
 
     public static City create(CommandCity commandCity){
-        return new City(commandCity.getName(), commandCity.getCode(), commandCity.getDepartment());
+        return new City(commandCity.getId(),commandCity.getName(), commandCity.getCode(), commandCity.getDepartment());
     }
 }

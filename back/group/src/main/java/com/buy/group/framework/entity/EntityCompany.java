@@ -35,14 +35,7 @@ public class EntityCompany implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private EntityUser user;
-
-    public EntityCompany(String nit, String address, BigDecimal rate, EntityUser user) {
-        this.nit = nit;
-        this.address = address;
-        this.rate = rate;
-        this.user = user;
-    }
+    private EntityUser user;    
 
     public Long getId() {
         return this.id;

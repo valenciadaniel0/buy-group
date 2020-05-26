@@ -6,13 +6,12 @@ import java.util.stream.Collectors;
 import com.buy.group.domain.model.User;
 import com.buy.group.framework.entity.EntityUser;
 
+import org.modelmapper.ModelMapper;
+
 public class MapperUser {
     public static EntityUser modelToEntity(User user) {
-        return new EntityUser(user.getUsername(), user.getEmail(), user.getPassword(), user.getDeviceToken(),
-                user.getName(), user.getActive(), MapperCity.modelToEntity(user.getCity()),
-                MapperRole.modelsListToEntitiesList(user.getRoles()),
-                MapperBuyer.modelsListToEntitiesList(user.getBuyers()),
-                MapperCompany.modelsListToEntitiesList(user.getCompanies()));
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(user, EntityUser.class);
     }
 
     public static List<EntityUser> modelsListToEntitiesList(List<User> users) {

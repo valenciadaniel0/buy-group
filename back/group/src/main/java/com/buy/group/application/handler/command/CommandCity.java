@@ -3,6 +3,7 @@ package com.buy.group.application.handler.command;
 import com.buy.group.domain.model.Department;
 
 public class CommandCity{
+    private Long id;
     private String name;
     private String code;
     private Department department;
@@ -10,10 +11,15 @@ public class CommandCity{
     public CommandCity(){        
     }
 
-    public CommandCity(String name, String code, Department department){
+    public CommandCity(Long id,String name, String code, Department department){
+        this.id = id;
         this.name = name;
         this.code = code;
         this.department = department;
+    }
+
+    public Long getId(){
+        return this.id;
     }
 
     public String getName(){

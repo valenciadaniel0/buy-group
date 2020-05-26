@@ -62,24 +62,7 @@ public class EntityUser implements UserDetails, Serializable {
     private List<EntityBuyer> buyers;
 
     @ManyToMany(mappedBy = "user")
-    private List<EntityCompany> companies;
-
-    public EntityUser() {
-    }
-
-    public EntityUser(String username, String email, String password, String deviceToken, String name, Integer active,
-            EntityCity city, List<EntityRole> roles, List<EntityBuyer> buyers, List<EntityCompany> companies) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.deviceToken = deviceToken;
-        this.name = name;
-        this.active = active;
-        this.city = city;
-        this.roles = roles;
-        this.buyers = buyers;
-        this.companies = companies;
-    }
+    private List<EntityCompany> companies;    
 
     public Long getId() {
         return this.id;

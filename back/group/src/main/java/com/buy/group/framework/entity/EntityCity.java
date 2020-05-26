@@ -31,18 +31,7 @@ public class EntityCity implements Serializable{
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id", nullable = false)
     @JsonIgnore
-    private EntityDepartment department;
-
-    public EntityCity(){
-        
-    }
-
-    public EntityCity(Long id, String name, String code, EntityDepartment department) {
-        this.id = id;
-        this.name = name;
-        this.code = code;
-        this.department = department;
-    }
+    private EntityDepartment department;    
 
     public Long getId() {
         return this.id;

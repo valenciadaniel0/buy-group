@@ -25,16 +25,7 @@ public class EntityRole implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.EAGER)
-    private List<EntityUser> users;
-
-    public EntityRole() {
-    }
-
-    public EntityRole(Long id, String name, List<EntityUser> users) {
-        this.id = id;
-        this.name = name;
-        this.users = users;
-    }
+    private List<EntityUser> users;    
 
     public Long getId() {
         return this.id;

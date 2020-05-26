@@ -6,27 +6,40 @@ public class Department {
 
     private Long id;
     private String code;
-    private String name;    
+    private String name;
 
-    public Department(){
+    public Department() {
     }
 
-    public Department(String code, String name) {
+    public Department(Long id, String code, String name) {
         DataValidator.validateNull(code, THE_CODE_IS_REQUIRED);
         DataValidator.validateNull(name, THE_NAME_IS_REQUIRED);
+        this.id = id;
         this.code = code;
-        this.name = name;        
+        this.name = name;
     }
 
     public Long getId() {
         return this.id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCode() {
         return this.code;
     }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getName() {
         return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

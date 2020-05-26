@@ -35,14 +35,7 @@ public class EntityBuyer implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private EntityUser user;
-
-    public EntityBuyer(String address, String idNumber, BigDecimal rate, EntityUser user) {
-        this.address = address;
-        this.idNumber = idNumber;
-        this.rate = rate;
-        this.user = user;
-    }
+    private EntityUser user;   
 
     public String getAddress() {
         return this.address;

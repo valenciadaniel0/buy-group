@@ -10,6 +10,6 @@ public class FactoryDepartment {
     }
 
     public static Department create(CommandDepartment commandDepartment){
-        return new Department(commandDepartment.getCode(), commandDepartment.getName());
+        return new Department(commandDepartment.getId(), commandDepartment.getCode(), commandDepartment.getName());
     }
 }

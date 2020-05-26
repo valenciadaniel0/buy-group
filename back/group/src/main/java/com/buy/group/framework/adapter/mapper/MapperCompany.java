@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 import com.buy.group.domain.model.Company;
 import com.buy.group.framework.entity.EntityCompany;
 
+import org.modelmapper.ModelMapper;
+
 public class MapperCompany {
     public static EntityCompany modelToEntity(Company company) {
-        return new EntityCompany(company.getNit(), company.getAddress(), company.getRate(),
-                MapperUser.modelToEntity(company.getUser()));
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(company, EntityCompany.class);
     }
 
     public static List<EntityCompany> modelsListToEntitiesList(List<Company> companies) {

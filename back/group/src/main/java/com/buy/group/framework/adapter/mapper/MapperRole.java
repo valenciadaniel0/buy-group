@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 import com.buy.group.domain.model.Role;
 import com.buy.group.framework.entity.EntityRole;
 
+import org.modelmapper.ModelMapper;
+
 public class MapperRole {
     public static EntityRole modelToEntity(Role role) {
-        return new EntityRole(role.getId(), role.getName(), MapperUser.modelsListToEntitiesList(role.getUsers()));
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(role, EntityRole.class);
     }
 
     public static List<EntityRole> modelsListToEntitiesList(List<Role> roles) {

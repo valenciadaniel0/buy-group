@@ -13,10 +13,10 @@ public class JwtResponse implements Serializable {
 	private final String name;
 	private final String deviceToken;
 	private final String userName;
-	private final List<EntityRole> roles;
+	private final List<String> roles;
 
 	public JwtResponse(String jwttoken, String email, String name, String deviceToken, String userName,
-			List<EntityRole> roles) {
+			List<String> roles) {
 		this.jwttoken = jwttoken;
 		this.email = email;
 		this.name = name;
@@ -45,7 +45,7 @@ public class JwtResponse implements Serializable {
 		return this.userName;
 	}
 
-	public List<EntityRole> getRoles() {
+	public List<String> getRoles() {
 		return this.roles;
 	}
 }

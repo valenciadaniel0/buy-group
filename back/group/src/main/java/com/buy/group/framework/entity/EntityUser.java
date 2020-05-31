@@ -1,10 +1,7 @@
 package com.buy.group.framework.entity;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,14 +15,10 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity(name = "users")
-public class EntityUser implements UserDetails, Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class EntityUser {    
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,20 +42,14 @@ public class EntityUser implements UserDetails, Serializable {
     @Column(name = "active", nullable = false)
     private Integer active;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
     @JsonIgnore
     private EntityCity city;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private List<EntityRole> roles;
-
-    @ManyToMany(mappedBy = "user")
-    private List<EntityBuyer> buyers;
-
-    @ManyToMany(mappedBy = "user")
-    private List<EntityCompany> companies;    
+    private List<EntityRole> roles;    
 
     public Long getId() {
         return this.id;
@@ -132,37 +119,11 @@ public class EntityUser implements UserDetails, Serializable {
         return this.roles;
     }
 
+    public void setRoles(List<EntityRole> roles) {
+        this.roles = roles;
+    }
+
     public void encryptPassword(PasswordEncoder bcryptEncoder) {
         this.setPassword(bcryptEncoder.encode(this.getPassword()));
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+    }    
 }

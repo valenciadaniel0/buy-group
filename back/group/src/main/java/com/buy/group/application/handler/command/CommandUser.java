@@ -2,9 +2,7 @@ package com.buy.group.application.handler.command;
 
 import java.util.List;
 
-import com.buy.group.domain.model.Buyer;
 import com.buy.group.domain.model.City;
-import com.buy.group.domain.model.Company;
 import com.buy.group.domain.model.Role;
 
 public class CommandUser {
@@ -16,15 +14,13 @@ public class CommandUser {
     private String name;
     private Integer active;
     private City city;
-    private List<Role> roles;
-    private List<Buyer> buyers;
-    private List<Company> companies;
+    private List<Role> roles;    
 
     public CommandUser() {
     }
 
     public CommandUser(Long id, String username, String email, String password, String deviceToken, String name,
-            Integer active, City city, List<Role> roles, List<Buyer> buyers, List<Company> companies) {
+            Integer active, City city, List<Role> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -33,9 +29,7 @@ public class CommandUser {
         this.name = name;
         this.active = active;
         this.city = city;
-        this.roles = roles;
-        this.buyers = buyers;
-        this.companies = companies;
+        this.roles = roles;      
     }
 
     public Long getId() {
@@ -112,21 +106,5 @@ public class CommandUser {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<Buyer> getBuyers() {
-        return this.buyers;
-    }
-
-    public void setBuyer(List<Buyer> buyers) {
-        this.buyers = buyers;
-    }
-
-    public List<Company> getCompanies() {
-        return this.companies;
-    }
-
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
-    }
+    }    
 }

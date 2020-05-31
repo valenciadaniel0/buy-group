@@ -24,6 +24,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,9 +55,9 @@ public class ControllerUser {
     }
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity createAuthenticationToken(@RequestBody CommandUser commandUser) throws Exception {        
+    public ResponseEntity createAuthenticationToken(@RequestBody CommandUser commandUser) throws Exception {
         authenticate(commandUser.getEmail(), commandUser.getPassword());
-        final EntityUser userDetails = repositoryUserImplementation.loadUserByUsername(commandUser.getEmail());
+        final UserDetails userDetails = repositoryUserImplementation.loadUserByUsername(commandUser.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
         User user = this.handlerGetUserByEmail.run(commandUser.getEmail());
         List<String> roles = new ArrayList<>();
@@ -76,7 +77,7 @@ public class ControllerUser {
     }
 
     @PostMapping(value = "/register")
-    public void create(@RequestBody CommandUser commandUser) {
+    public void create(@RequestBody CommandUser commandUser) {        
         this.handlerCreateUser.run(commandUser);
     }
 

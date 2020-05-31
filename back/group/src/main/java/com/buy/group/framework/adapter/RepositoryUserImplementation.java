@@ -13,6 +13,7 @@ import com.buy.group.framework.entity.EntityUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,19 +41,20 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
     }
 
     @Override
-    public EntityUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        EntityUser user = this.userDBRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        EntityUser user = this.userDBRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with email: " + email);
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         List<EntityRole> roles = user.getRoles();
-        for (EntityRole role : roles) {            
+        for (EntityRole role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        return user;       
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+                authorities);
     }
 
     @Override

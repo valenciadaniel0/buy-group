@@ -16,15 +16,13 @@ public class User {
     private String name;
     private Integer active;
     private City city;
-    private List<Role> roles;
-    private List<Buyer> buyers;
-    private List<Company> companies;
+    private List<Role> roles;    
 
     public User() {
     }
 
     public User(Long id, String username, String email, String password, String deviceToken, String name,
-            Integer active, City city, List<Role> roles, List<Buyer> buyers, List<Company> companies) {
+            Integer active, City city, List<Role> roles) {
         DataValidator.validateNull(username, USERNAME_IS_REQUIRED);
         DataValidator.validateNull(email, EMAIL_IS_REQUIRED);
         DataValidator.validateNull(password, PASSWORD_IS_REQUIRED);
@@ -37,9 +35,7 @@ public class User {
         this.name = name;
         this.active = active;
         this.city = city;
-        this.roles = roles;
-        this.buyers = buyers;
-        this.companies = companies;
+        this.roles = roles;       
     }
 
     public Long getId() {
@@ -112,21 +108,5 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    public List<Buyer> getBuyers() {
-        return this.buyers;
-    }
-
-    public void setBuyers(List<Buyer> buyers) {
-        this.buyers = buyers;
-    }
-
-    public List<Company> getCompanies() {
-        return this.companies;
-    }
-
-    public void setCompanies(List<Company> companies) {
-        this.companies = companies;
-    }
+    }   
 }

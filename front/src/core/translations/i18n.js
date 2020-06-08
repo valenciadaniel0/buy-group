@@ -4,24 +4,22 @@ import es from "./es/common.json";
 i18n.init({
   // we init with resources
   resources: {
-    es: es
+    es: es,
   },
   fallbackLng: "es",
   debug: false,
 
   // have a common namespace used around the full app
   ns: ["translations"],
-  defaultNS: "translations",
+  defaultNS: "translations",  
 
-  keySeparator: false, // we use content as keys
-
-  interpolation: {    
-    formatSeparator: ","
+  interpolation: {
+    formatSeparator: ",",
   },
 
   react: {
-    wait: true
-  }
+    wait: true,
+  },
 });
 
 export default i18n;

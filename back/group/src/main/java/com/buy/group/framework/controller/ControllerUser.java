@@ -61,6 +61,7 @@ public class ControllerUser {
         final String token = jwtTokenUtil.generateToken(userDetails);
         User user = this.handlerGetUserByEmail.run(commandUser.getEmail());
         List<String> roles = new ArrayList<>();
+
         for (Role role : user.getRoles()) {
             roles.add(role.getName());
         }
@@ -77,7 +78,7 @@ public class ControllerUser {
     }
 
     @PostMapping(value = "/register")
-    public void create(@RequestBody CommandUser commandUser) {        
+    public void create(@RequestBody CommandUser commandUser) {
         this.handlerCreateUser.run(commandUser);
     }
 

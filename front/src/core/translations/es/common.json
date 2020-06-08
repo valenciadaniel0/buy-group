@@ -1,12 +1,21 @@
 {
   "translations": {
+    "cities": "Ciudades",
+    "companies": "Empresas",
+    "departments": "Departamentos",
     "enter_email": "Ingresar correo electrónico",
     "enter_password": "Ingresar contraseña",
     "login": "Ingresar",
     "logout": "Cerrar sesión",
-    "long_texts":{
-      "users_card":"Podrás ver los usuarios registrados en el sistema"
+    "long_texts": {
+      "users_card": "Podrás ver los usuarios registrados en el sistema",
+      "companies_card": "Podrás ver las empresas registradas en el sistema",
+      "roles_card": "Podrás ver los roles registrados en el sistema",
+      "cities_card": "Podrás ver las ciudades registradas en el sistema",
+      "departments_card": "Podrás ver los departamentos registrados en el sistema"
     },
-    "register": "Registro"
+    "register": "Registro",
+    "roles": "Roles",
+    "users": "Usuarios"
   }
 }

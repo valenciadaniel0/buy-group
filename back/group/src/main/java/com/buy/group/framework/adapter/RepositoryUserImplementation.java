@@ -59,6 +59,7 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
 
     @Override
     public User getByEmail(String email) {
+        System.out.println(this.userDBRepository.findByEmail(email).getRoles().size());
         return this.modelMapper.map(this.userDBRepository.findByEmail(email), User.class);
     }
 }

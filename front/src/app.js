@@ -10,8 +10,7 @@ import Admin from "./features/admin";
 import Users from "./features/users";
 
 class App extends React.Component {
-  renderHeader() {
-    console.log(this.props.isSignedIn);
+  renderHeader() {    
     return this.props.isSignedIn ? <Header /> : null;
   }
 

@@ -1,10 +1,12 @@
 {
   "translations": {
+    "cancel":"Cancelar",
     "cities": "Ciudades",
     "companies": "Empresas",
     "departments": "Departamentos",
     "enter_email": "Ingresar correo electrónico",
     "enter_password": "Ingresar contraseña",
+    "forgot_my_password": "Olvidé mi contraseña",
     "login": "Ingresar",
     "logout": "Cerrar sesión",
     "long_texts": {
@@ -15,6 +17,7 @@
       "departments_card": "Podrás ver los departamentos registrados en el sistema"
     },
     "register": "Registro",
+    "registerme": "Registrarme",
     "roles": "Roles",
     "users": "Usuarios"
   }

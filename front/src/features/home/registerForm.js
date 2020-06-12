@@ -1,47 +1,24 @@
 import React from "react";
 import { compose } from "redux";
-import { Field, reduxForm } from "redux-form";
 import { Form, FormGroup, Row, Col } from "react-bootstrap";
+import { Field, reduxForm } from "redux-form";
 import PrimaryButton from "../../shared/primaryButton";
 import { withTranslation } from "react-i18next";
 import { translate } from "../../core/translations";
+import TextField from "../../shared/inputs/textField";
+import PasswordField from "../../shared/inputs/passwordField";
 
-class LoginForm extends React.Component {
-  renderError({ error, touched }) {
-    if (touched && error) {
-      return (
-        <div className="ui error message">
-          <div className="header">{error}</div>
-        </div>
-      );
-    }
-  }
-  renderInput = ({ input, label, meta }) => {
-    const className = `field ${meta.touched && meta.error ? "error" : ""}`;
-    return (
-      <div className="form-group">
-        <label htmlFor={input.name}>{label}</label>
-        <input
-          {...input}
-          autoComplete="off"
-          id={input.name}
-          className="form-control"
-          type={"password" === input.name ? "password" : "text"}
-        />
-        {this.renderError(meta)}
-      </div>
-    );
-  };
+class RegisterForm extends React.Component {
 
   onSubmit = (formValues) => {
-    this.props.onSubmit(formValues);
+    //this.props.onSubmit(formValues);
   };
 
   render() {
     return (
       <React.Fragment>
         <Form
-          onSubmit={this.props.handleSubmit(this.onSubmit)}
+          onSubmit={this.props.onSubmit(this.onSubmit)}
           className="ui form error"
         >
           <FormGroup className="form-group">
@@ -49,7 +26,7 @@ class LoginForm extends React.Component {
               name="email"
               type="email"
               id="email"
-              component={this.renderInput}
+              component={TextField}
               label={translate("enter_email", this.props.t)}
             />
           </FormGroup>
@@ -57,7 +34,7 @@ class LoginForm extends React.Component {
             <Field
               name="password"
               type="password"
-              component={this.renderInput}
+              component={PasswordField}
               label={translate("enter_password", this.props.t)}
             />
           </FormGroup>
@@ -68,13 +45,8 @@ class LoginForm extends React.Component {
         </Form>
         <Row>
           <Col>
-            <a onClick={() => this.props.changeFormType("register")}>
-              {translate("registerme", this.props.t)}
-            </a>
-          </Col>
-          <Col>
-            <a onClick={() => this.props.changeFormType("forgot-password")}>
-              {translate("forgot_my_password", this.props.t)}
+            <a onClick={() => this.props.changeFormType("login")}>
+              {translate("cancel", this.props.t)}
             </a>
           </Col>
         </Row>
@@ -97,9 +69,9 @@ const validate = (formValues) => {
 };
 
 export default compose(
-  withTranslation("translations"),
-  reduxForm({
-    form: "loginForm",
-    validate,
-  })
-)(LoginForm);
+    withTranslation("translations"),
+    reduxForm({
+      form: "registerForm",
+      validate,
+    })
+  )(RegisterForm);

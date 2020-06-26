@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.buy.group.application.handler.command.CommandUser;
 import com.buy.group.application.handler.users.HandlerCreateUser;
 import com.buy.group.application.handler.users.HandlerGetUserByEmail;
+import com.buy.group.application.handler.users.HandlerRecoverPassword;
+import com.buy.group.application.handler.users.HandlerUpdatePassword;
+import com.buy.group.application.handler.users.HandlerUpdateRecoverCode;
+import com.buy.group.application.handler.users.HandlerUpdateUser;
 import com.buy.group.domain.model.Role;
 import com.buy.group.domain.model.User;
 import com.buy.group.framework.adapter.RepositoryUserImplementation;
@@ -29,6 +33,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +44,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ControllerUser {
     private HandlerCreateUser handlerCreateUser;
     private HandlerGetUserByEmail handlerGetUserByEmail;
+    private HandlerUpdatePassword handlerUpdatePassword;
+    private HandlerUpdateUser handlerUpdateUser;
+    private HandlerUpdateRecoverCode handlerUpdateRecoverCode;
+    private HandlerRecoverPassword handlerRecoverPassword;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -49,9 +58,15 @@ public class ControllerUser {
     @Autowired
     private RepositoryUserImplementation repositoryUserImplementation;
 
-    public ControllerUser(HandlerCreateUser handlerCreateUser, HandlerGetUserByEmail handlerGetUserByEmail) {
+    public ControllerUser(HandlerCreateUser handlerCreateUser, HandlerGetUserByEmail handlerGetUserByEmail,
+            HandlerUpdatePassword handlerUpdatePassword, HandlerUpdateUser handlerUpdateUser,
+            HandlerUpdateRecoverCode handlerUpdateRecoverCode, HandlerRecoverPassword handlerRecoverPassword) {
         this.handlerCreateUser = handlerCreateUser;
         this.handlerGetUserByEmail = handlerGetUserByEmail;
+        this.handlerUpdatePassword = handlerUpdatePassword;
+        this.handlerUpdateUser = handlerUpdateUser;
+        this.handlerUpdateRecoverCode = handlerUpdateRecoverCode;
+        this.handlerRecoverPassword = handlerRecoverPassword;
     }
 
     @PostMapping(value = "/authenticate")
@@ -67,6 +82,27 @@ public class ControllerUser {
         }
         return ResponseEntity.ok(new JwtResponse(token, user.getEmail(), user.getName(), user.getDeviceToken(),
                 user.getUsername(), roles));
+    }
+
+    @PostMapping(value = "/set-recover-code")
+    public void updateRecoverCode(@RequestBody CommandUser commandUser) {
+        this.handlerUpdateRecoverCode.run(commandUser.getEmail());
+    }
+
+    @PutMapping(value = "")
+    public void update(@RequestBody CommandUser commandUser) {
+        this.handlerUpdateUser.run(commandUser);
+    }
+
+    @PostMapping(value = "/recover-password")
+    public void updatePassword(@RequestBody CommandUser commandUser) {
+        User user = this.handlerGetUserByEmail.run(commandUser.getEmail());
+        this.handlerRecoverPassword.run(user, commandUser.getRecoverCode());
+    }
+
+    @GetMapping("/get-by-email")
+    public User getUserByEmail(@RequestBody CommandUser commandUser) {
+        return this.handlerGetUserByEmail.run(commandUser.getEmail());
     }
 
     @GetMapping(value = "/logout")

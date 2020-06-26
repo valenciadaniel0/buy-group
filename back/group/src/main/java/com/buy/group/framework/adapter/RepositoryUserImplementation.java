@@ -26,6 +26,7 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
     private UserDBRepository userDBRepository;
     private ModelMapper modelMapper;
     private PasswordEncoder bcryptEncoder;
+    private final String USER_WITH_EMAIL_NOT_FOUND = "No se encontró un usuario con el email: ";
 
     public RepositoryUserImplementation(UserDBRepository userDBRepository) {
         this.userDBRepository = userDBRepository;
@@ -61,5 +62,37 @@ public class RepositoryUserImplementation implements RepositoryUser, UserDetails
     public User getByEmail(String email) {
         System.out.println(this.userDBRepository.findByEmail(email).getRoles().size());
         return this.modelMapper.map(this.userDBRepository.findByEmail(email), User.class);
+    }
+
+    @Override
+    public void update(User user) {
+        EntityUser entityUser = MapperUser.modelToEntity(user);
+        this.userDBRepository.update(entityUser.getId(), entityUser.getActive(), entityUser.getDeviceToken(),
+                entityUser.getEmail(), entityUser.getName());
+    }
+
+    @Override
+    public void updatePassword(User user, String newPassword) {
+        if (user == null) {
+            throw new UsernameNotFoundException(this.USER_WITH_EMAIL_NOT_FOUND + user.getEmail());
+        }
+
+        EntityUser entityUser = this.userDBRepository.findByUsername(user.getEmail());
+        entityUser.setPassword(newPassword);
+        entityUser.encryptPassword(bcryptEncoder);
+
+        this.userDBRepository.updatePassword(entityUser.getId(), entityUser.getPassword());
+    }
+
+    @Override
+    public void updateRecoverCode(User user, String newCode) {
+        if (user == null) {
+            throw new UsernameNotFoundException(this.USER_WITH_EMAIL_NOT_FOUND + user.getEmail());
+        }
+
+        EntityUser entityUser = this.userDBRepository.findByUsername(user.getEmail());
+        entityUser.setRecoverCode(newCode);
+
+        this.userDBRepository.updateRecoverCode(entityUser.getId(), entityUser.getRecoverCode());
     }
 }

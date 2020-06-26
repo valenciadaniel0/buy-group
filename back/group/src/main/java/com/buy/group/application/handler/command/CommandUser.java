@@ -13,14 +13,15 @@ public class CommandUser {
     private String deviceToken;
     private String name;
     private Integer active;
+    private String recoverCode;
     private City city;
-    private List<Role> roles;    
+    private List<Role> roles;
 
     public CommandUser() {
     }
 
     public CommandUser(Long id, String username, String email, String password, String deviceToken, String name,
-            Integer active, City city, List<Role> roles) {
+            Integer active, String recoverCode, City city, List<Role> roles) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -28,8 +29,9 @@ public class CommandUser {
         this.deviceToken = deviceToken;
         this.name = name;
         this.active = active;
+        this.recoverCode = recoverCode;
         this.city = city;
-        this.roles = roles;      
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -92,6 +94,14 @@ public class CommandUser {
         this.active = active;
     }
 
+    public String getRecoverCode() {
+        return recoverCode;
+    }
+
+    public void setRecoverCode(String recoverCode) {
+        this.recoverCode = recoverCode;
+    }
+
     public City getCity() {
         return this.city;
     }
@@ -106,5 +116,5 @@ public class CommandUser {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }    
+    }
 }

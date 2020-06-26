@@ -15,6 +15,7 @@ public class User {
     private String deviceToken;
     private String name;
     private Integer active;
+    private String recoverCode;
     private City city;
     private List<Role> roles;    
 
@@ -22,7 +23,7 @@ public class User {
     }
 
     public User(Long id, String username, String email, String password, String deviceToken, String name,
-            Integer active, City city, List<Role> roles) {
+            Integer active,String recoverCode, City city, List<Role> roles) {
         DataValidator.validateNull(username, USERNAME_IS_REQUIRED);
         DataValidator.validateNull(email, EMAIL_IS_REQUIRED);
         DataValidator.validateNull(password, PASSWORD_IS_REQUIRED);
@@ -34,6 +35,7 @@ public class User {
         this.deviceToken = deviceToken;
         this.name = name;
         this.active = active;
+        this.recoverCode = recoverCode;
         this.city = city;
         this.roles = roles;       
     }
@@ -92,6 +94,14 @@ public class User {
 
     public void setActive(Integer active) {
         this.active = active;
+    }
+
+    public String getRecoverCode() {
+        return this.recoverCode;
+    }
+
+    public void setRecoverCode(String recoverCode) {
+        this.recoverCode = recoverCode;
     }
 
     public City getCity() {

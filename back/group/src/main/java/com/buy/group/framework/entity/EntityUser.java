@@ -42,6 +42,9 @@ public class EntityUser {
     @Column(name = "active", nullable = false)
     private Integer active;
 
+    @Column(name = "recover_code", nullable = true)
+    private String recoverCode;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id")
     @JsonIgnore
@@ -105,6 +108,14 @@ public class EntityUser {
 
     public void setActive(Integer active) {
         this.active = active;
+    }
+
+    public String getRecoverCode() {
+        return this.recoverCode;
+    }
+
+    public void setRecoverCode(String recoverCode) {
+        this.recoverCode = recoverCode;
     }
 
     public EntityCity getCity() {
